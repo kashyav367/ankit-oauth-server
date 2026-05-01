@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body { font-family: 'Inter', sans-serif; background:#050302; }
+
+/* 🔥 CHAI THEME BACKGROUND */
+.bg-main {
+  background:
+    radial-gradient(circle at 15% 25%, rgba(255,140,0,0.18), transparent 40%),
+    radial-gradient(circle at 85% 75%, rgba(255,180,0,0.12), transparent 40%);
+}
+
+/* 🔥 GLASS CARD */
+.glass {
+  background: rgba(20,12,6,0.65);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* 🔥 INPUT */
+.input {
+  background:#0c0703;
+  border:1px solid rgba(255,140,0,0.25);
+}
+.input:focus {
+  border-color:#f59e0b;
+  box-shadow:0 0 0 2px rgba(245,158,11,0.25);
+}
+
+/* 🔥 BUTTON */
+.btn {
+  background: linear-gradient(90deg,#f59e0b,#fbbf24);
+  color:black;
+  font-weight:600;
+}
+</style>
+</head>
+
+<body class="min-h-screen text-white flex items-center justify-center">
+
+<div class="absolute inset-0 bg-main"></div>
+
+<main class="relative max-w-5xl w-full px-6">
+
+<div class="grid lg:grid-cols-[1fr_1fr] rounded-3xl overflow-hidden shadow-2xl glass">
+
+<!-- LEFT -->
+<section class="p-10">
+
+<p class="text-orange-400 text-xs tracking-widest">
+CREATE ACCOUNT
+</p>
+
+<h1 class="text-4xl font-bold mt-5 leading-tight">
+Start the authorization flow with a <span class="text-orange-300">new user</span>
+</h1>
+
+<p class="text-gray-400 mt-4">
+This page creates the user, validates the client ID, and returns an authorization code tied to the redirect URL.
+</p>
+
+<div class="mt-8 p-5 rounded-xl bg-black/40 border border-white/10">
+<p class="font-semibold">Flow notes</p>
+<ul class="text-sm text-gray-400 mt-2 space-y-1">
+<li>Client ID is required</li>
+<li>Redirect must match</li>
+<li>Returns authorization code</li>
+</ul>
+</div>
+
+</section>
+
+<!-- RIGHT -->
+<section class="p-10 bg-black/70">
+
+<div id="client-meta" class="mb-6 p-4 rounded-xl bg-black/40 border border-orange-400/20 text-sm">
+  <p class="text-red-400 font-semibold">Missing client_id.</p>
+  <p class="text-gray-400 mt-2">
+    Open this page using a registered client link so signup can issue an authorization code.
+  </p>
+</div>
+
+<form id="signup-form" class="space-y-5">
+
+<input id="name" value="John Doe"
+class="input w-full p-4 rounded-xl outline-none">
+
+<input id="email" value="john@example.com"
+class="input w-full p-4 rounded-xl outline-none">
+
+<input id="password" type="password" placeholder="Create a secure password"
+class="input w-full p-4 rounded-xl outline-none">
+
+<button class="btn w-full p-4 rounded-xl text-lg">
+CREATE USER AND CONTINUE
+</button>
+
+</form>
+
+<div id="status" class="mt-4 hidden text-sm"></div>
+
+<p class="mt-6 text-sm text-gray-400">
+Already have an account?
+<a id="signin-link" class="text-orange-400 underline">Go to signin</a>
+</p>
+
+</section>
+
+</div>
+</main>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const clientId = params.get("client_id");
+const redirectUri = params.get("redirect_uri");
+const state = params.get("state");
+
+const form = document.getElementById("signup-form");
+const statusBox = document.getElementById("status");
+const signinLink = document.getElementById("signin-link");
+
+const setStatus = (msg, error=false) => {
+  statusBox.classList.remove("hidden");
+  statusBox.innerText = msg;
+  statusBox.className = "mt-4 text-sm " + (error ? "text-red-400" : "text-green-400");
+};
+
+if (clientId) {
+  signinLink.href = "/api/auth/signin" + window.location.search;
+} else {
+  form.style.pointerEvents = "none";
+  form.style.opacity = "0.5";
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  setStatus("Creating account...");
+
+  const res = await fetch(window.location.pathname, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: form.name.value,
+      email: form.email.value,
+      password: form.password.value,
+      clientId,
+      redirectUri,
+      state
+    })
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) return setStatus(data.message, true);
+
+  const redirectTo = data?.data?.redirectTo || data.redirectTo;
+
+  window.location.href = redirectTo;
+});
+</script>
+
+</body>
+</html>
