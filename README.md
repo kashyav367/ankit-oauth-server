@@ -260,9 +260,11 @@ Planned improvements:
 Contributions are welcome. For small fixes, open a PR with a clear title and
 description. For larger changes, open an issue first to discuss the plan.
 
-## License
+---
 
-This project is provided under the MIT License. See the `LICENSE` file.
+## Author
+
+ Ankit Kumar Singh
 
 ---
 
