@@ -86,60 +86,42 @@ This project is my hands-on implementation of those concepts.
 ## 📦 API Endpoints
 
 ### 🔹 Register Client
+
 ```http
 POST /api/auth/client/register
-## 📦 API Endpoints
-
-### 🔹 Signup
-```http
+🔹 Signup
 POST /api/auth/signup
-
-### 🔹 Signin
+🔹 Signin
 POST /api/auth/signin
-
-### 🔹 Token Exchange
+🔹 Token Exchange
 POST /api/auth/token
+🧠 Key Learnings
+OAuth is not authentication — it’s authorization
+Authorization Code Flow is redirect-based and state-driven
+JWT must be securely signed and verified
+Backend controls the entire auth lifecycle
+Secure systems require flow design, not just tokens
+⚠️ Limitations
+No refresh token support yet
+No PKCE implementation
+No rate limiting / abuse protection
+Secrets stored in .env
+No key rotation (static JWT secret)
+🔮 Future Improvements
+🔁 Refresh Token Flow
+🔐 PKCE support
+👤 User profile endpoint (OIDC style)
+🌍 Multi-client dashboard
+📊 Admin panel
+🛡 Rate limiting & security hardening
+🧪 Demo
 
----
+This project includes a simple client UI that:
 
-### 🧠 Key Learnings
-- OAuth is not authentication — it’s authorization
-- Authorization Code Flow is redirect-based and state-driven
-- JWT must be securely signed and verified
-- Backend controls the entire auth lifecycle
-- Secure systems require flow design, not just tokens
-
----
-
-### ⚠️ Limitations
-- No refresh token support yet
-- No PKCE implementation
-- No rate limiting / abuse protection
-- Secrets stored in .env
-- No key rotation (static JWT secret)
-
----
-
-### 🔮 Future Improvements
-- 🔁 Refresh Token Flow
-- 🔐 PKCE support
-- 👤 User profile endpoint (OIDC style)
-- 🌍 Multi-client dashboard
-- 📊 Admin panel
-- 🛡 Rate limiting & security hardening
-
----
-
-### 🧪 Demo
-
-## This project includes a simple client UI that:
-
-- Performs full OAuth flow
-- Handles redirect & code exchange
-- Displays authentication results
-
-
-### 📂 Project Structure
+Performs full OAuth flow
+Handles redirect & code exchange
+Displays authentication results
+📂 Project Structure
 auth-server/
 ├── src/
 │   ├── modules/
@@ -149,37 +131,24 @@ auth-server/
 │   ├── signin.html
 │   ├── signup.html
 │   ├── client.html
-
----
-
-### 🚀 Getting Started
-- git clone https://github.com/your-username/ankit-oauth-server.git
-- cd ankit-oauth-server
-- npm install
-- npm run dev
-
----
-
-### ⚙️ Environment Variables
-  -  Create a .env file:-
-  -  PORT=8000
-  -  JWT_SECRET=your_secret_key
-
----
+🚀 Getting Started
+git clone https://github.com/your-username/ankit-oauth-server.git
+cd ankit-oauth-server
+npm install
+npm run dev
+⚙️ Environment Variables
+PORT=8000
+JWT_SECRET=your_secret_key
 ❤️ Motivation
 
-- “I wanted to understand authentication by building it, not just using it.”
-- This project represents a deep dive into how identity and security systems power modern applications.
+“I wanted to understand authentication by building it, not just using it.”
 
----
+👨‍💻 Author
 
-### 👨‍💻 Author
+Ankit Kumar Singh 🚀
 
-- Ankit Kumar Singh 🚀
+⭐ Support
 
----
-
-### ⭐ Support
-
-- If you found this useful, consider giving it a ⭐ on GitHub!
+Give a ⭐ if you like this project!
+├── sr
 
