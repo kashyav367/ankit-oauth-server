@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🔐 OAuth 2.0 Authentication Server
 
 A custom-built **OAuth 2.0 Authorization Server** implementing the **Authorization Code Flow**, designed to understand how real-world authentication systems (like Google Sign-In) actually work under the hood.
