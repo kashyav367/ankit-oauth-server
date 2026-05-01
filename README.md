@@ -1,47 +1,91 @@
-# 🔐 Custom OAuth 2.0 Authentication Server
+# 🔐 OAuth 2.0 Authentication Server
 
-This project is a custom implementation of OAuth 2.0 Authorization Code Flow.
+A custom-built **OAuth 2.0 Authorization Server** implementing the **Authorization Code Flow**, designed to understand how real-world authentication systems (like Google Sign-In) actually work under the hood.
 
-## 🚀 Features
+---
 
-- Client Registration (client_id & client_secret)
-- Signup / Signin system
-- Authorization Code generation
-- Redirect-based authentication flow
-- Token exchange API
-- JWT-based authentication
+## ✨ Overview
 
-## 🔁 Flow
+This project is a fully functional authentication server built from scratch to simulate real-world OAuth flows.
 
-1. Client redirects user to Auth Server
-2. User logs in
-3. Auth server returns authorization code
-4. Client exchanges code for token
-5. Client uses token to access protected APIs
+Instead of relying on third-party providers, it implements the complete authentication lifecycle:
 
-## 🛠 Tech Stack
+- 🔐 User Signup & Signin  
+- 🔁 Redirect-based Authentication  
+- 🎟 Authorization Code generation  
+- 🔑 Access Token (JWT)  
+- 🔄 Token exchange flow  
+- 🛡 Protected API access  
 
-- Node.js
-- Express.js
-- PostgreSQL
-- JWT
+---
 
-## 📦 Endpoints
+## 🎯 Why I Built This
 
-### Register Client
+I wanted to go beyond tutorials and deeply understand how authentication systems actually work internally.
+
+Questions I explored:
+
+- How does authorization code flow work behind redirects?  
+- How does client_id & client_secret validation happen?  
+- How are tokens securely generated and verified?  
+- How does backend handle authentication securely?  
+
+This project is my hands-on implementation of those concepts.
+
+---
+
+## ⚙️ Features
+
+### 🔐 Core Authentication
+- Authorization Code Flow  
+- User Signup & Signin  
+- Secure password handling  
+- Redirect-based login system  
+
+### 🎟 Token System
+- JWT-based Access Tokens  
+- Authorization Code generation  
+- Token exchange endpoint  
+
+### 🧩 Client System
+- Client Registration (client_id & client_secret)  
+- Multi-client support  
+- Redirect URI validation  
+
+### 🛡 Security
+- JWT verification middleware  
+- Protected routes using Bearer token  
+- Basic validation for auth flow  
+
+---
+
+## 🔄 Authentication Flow
+
+### Step-by-step:
+
+1. Client registers and gets `client_id` & `client_secret`  
+2. User is redirected to Auth Server  
+3. User signs in / signs up  
+4. Server generates authorization code  
+5. Redirect back to client with `?code=`  
+6. Client exchanges code for access token  
+7. Token used to access protected APIs  
+
+---
+
+## 🏗️ Architecture
+
+- **Backend:** Node.js + Express  
+- **Database:** PostgreSQL  
+- **ORM:** Drizzle ORM  
+- **Authentication:** JWT  
+- **Frontend:** HTML + TailwindCSS  
+
+---
+
+## 📦 API Endpoints
+
+### 🔹 Register Client
+```http
 POST /api/auth/client/register
 
-### Signup
-POST /api/auth/signup
-
-### Signin
-POST /api/auth/signin
-
-### Token
-POST /api/auth/token
-
-## 📌 Future Improvements
-
-- Refresh tokens
-- PKCE support
-- OIDC userinfo endpoint
