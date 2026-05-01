@@ -88,4 +88,15 @@ This project is my hands-on implementation of those concepts.
 ### 🔹 Register Client
 ```http
 POST /api/auth/client/register
+## 📦 API Endpoints
+
+### 🔹 Signup
+```http
+POST /api/auth/signup
+
+### 🔹 Signin
+POST /api/auth/signin
+
+### 🔹 Token Exchange
+POST /api/auth/token
 
